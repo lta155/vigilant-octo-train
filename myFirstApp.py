@@ -1,5 +1,5 @@
 import streamlit as st
-import pickle
+from joblib import load
 import numpy as np
 def frist():
     st.title("降水预测系统")
@@ -22,8 +22,7 @@ def frist():
     st.write('点击下列按钮得出降水预测')
     if st.button('按钮'):
         file_path = 'estimator.pickle'
-        with open(file_path, 'rb') as f:
-            estimator_new = pickle.load(f)
+        estimator_new = load(filename="estimator.pickle")
         X = np.array([T_ave, T_max, T_min, Press, Wind_dir, Wind_sp, Cloud_c])
         X = X.reshape(1, -1)
         # 将Series转化为二维数组
